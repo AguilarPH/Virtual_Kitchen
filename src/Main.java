@@ -28,6 +28,7 @@ public class Main {
         List<String> menu = new ArrayList<>();
         menu.add("Fried chicken");
         menu.add("French Fries");
+        menu.add("Milkshake");
 
         List<Double> menuPrices = new ArrayList<>();
         menuPrices.add(92.3);
