@@ -1,13 +1,13 @@
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String clientName, clientAddress;
-
 
         StringBuilder addressRequest = new StringBuilder("Hello ");
 
@@ -20,45 +20,57 @@ public class Main {
         System.out.print(addressRequest);
         clientAddress = sc.nextLine();
 
-        takingOrder(clientName, clientAddress);
-
+        System.out.println(takingOrder(clientName, clientAddress));
+        System.out.printf("Your order will be delivered to %s", clientAddress);
 
     }
-    public static void takingOrder(String clientName, String clientAddress) {
-        List<String> menu = new ArrayList<>();
-        menu.add("Fried chicken");
-        menu.add("French Fries");
-        menu.add("Milkshake");
 
-        List<Double> menuPrices = new ArrayList<>();
-        menuPrices.add(92.3);
-        menuPrices.add(26.0);
+    public static StringBuilder takingOrder(String clientName, String clientAddress) {
 
         Scanner sc = new Scanner(System.in);
+        NumberFormat curF = NumberFormat.getCurrencyInstance();
         String mealRequest;
+        StringBuilder output = new StringBuilder("We are preparing your ");
 
         System.out.printf("What meal would you like to have?: %n");
         mealRequest = sc.nextLine();
 
-        for (int i = 0 ; i < menu.size(); i++) {
-            if (mealRequest.equalsIgnoreCase(menu.get(i))) {
-                System.out.println(order(menu.get(i), clientName, menuPrices.get(i)));
-                System.out.printf("you will have it delivered at %s", clientAddress);
-            }
+        if (mealRequest != "") {
+            output.append(mealRequest)
+                    .append(", your total will be ")
+                    .append(curF.format(menuCheck(mealRequest)));
         }
-    }
-
-    public static StringBuilder order(String meal, String clientName, double price) {
-        NumberFormat curF = NumberFormat.getCurrencyInstance();
-        StringBuilder output = new StringBuilder("We are preparing your ");
-        String priceF = curF.format(price);
-        output.append(meal)
-                .append(" ")
-                .append(clientName)
-                .append(", your total will be ")
-                .append(priceF);
 
         return output;
+    }
+
+    public static double menuCheck(String ... items) {
+        double orderSum = 0;
+
+        for (String item : items) {
+            switch (item.toLowerCase()) {
+                case "fried chicken":
+                    System.out.printf("%s added to the order\n", item);
+                    orderSum += 92.3;
+                    break;
+
+                case "french fries":
+                    orderSum += 26.0;
+                    System.out.printf("%s added to the order\n", item);
+                    break;
+
+                case "milkshake":
+                    orderSum += 40.0;
+                    System.out.printf("%s added to the order\n", item);
+                    break;
+
+                default:
+                    System.out.printf("%s is not in the menu \n", item);
+
+            }
+        }
+        return orderSum;
+
     }
 
 }
