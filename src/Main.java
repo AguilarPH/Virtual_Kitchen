@@ -1,7 +1,9 @@
+import model.Menu;
+import model.MenuItems;
+
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class Main {
@@ -11,8 +13,6 @@ public class Main {
 
         StringBuilder addressRequest = new StringBuilder("Hello ");
 
-        System.out.println("Welcome to my Kitchen");
-        System.out.println("Please type your name: ");
         clientName = sc.nextLine();
         addressRequest.append(clientName)
             .append(", Please provide your delivery address")
@@ -25,7 +25,26 @@ public class Main {
 
     }
 
-    public static StringBuilder takingOrder(String clientName, String clientAddress) {
+    private static void greeting(){
+        Scanner sc = new Scanner(System.in);
+        String clientName;
+
+        System.out.println("Welcome to my Kitchen");
+        System.out.println("Please type your name: ");
+        clientName = sc.nextLine(); //pending to create a Client model
+
+    }
+
+    private static StringBuilder takingOrder(String clientName, String clientAddress) {
+        List<Menu> carte = new ArrayList<>();
+        carte.add(new Menu(MenuItems.FRIED_CHICKEN, Menu.MAIN_DISH));
+        carte.add(new Menu(MenuItems.BABY_RIBS, Menu.MAIN_DISH));
+        carte.add(new Menu(MenuItems.FRENCH_FRIES, Menu.SIDE_DISH));
+        carte.add(new Menu(MenuItems.FRENCH_FRIES, Menu.SIDE_DISH));
+        carte.add(new Menu(MenuItems.MILKSHAKE, Menu.SOFT_DRINK));
+
+        Order order = new Order();
+        order.showMenu(carte);
 
         Scanner sc = new Scanner(System.in);
         NumberFormat curF = NumberFormat.getCurrencyInstance();
@@ -38,39 +57,10 @@ public class Main {
         if (mealRequest != "") {
             output.append(mealRequest)
                     .append(", your total will be ")
-                    .append(curF.format(menuCheck(mealRequest)));
+                    .append(curF.format(Order.check(mealRequest)));
         }
 
         return output;
-    }
-
-    public static double menuCheck(String ... items) {
-        double orderSum = 0;
-
-        for (String item : items) {
-            switch (item.toLowerCase()) {
-                case "fried chicken":
-                    System.out.printf("%s added to the order\n", item);
-                    orderSum += 92.3;
-                    break;
-
-                case "french fries":
-                    orderSum += 26.0;
-                    System.out.printf("%s added to the order\n", item);
-                    break;
-
-                case "milkshake":
-                    orderSum += 40.0;
-                    System.out.printf("%s added to the order\n", item);
-                    break;
-
-                default:
-                    System.out.printf("%s is not in the menu \n", item);
-
-            }
-        }
-        return orderSum;
-
     }
 
 }
