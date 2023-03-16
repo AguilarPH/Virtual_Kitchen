@@ -1,12 +1,16 @@
+package beta_functions;
+
 import java.util.*;
 
-public class Test {
+public class Proto {
     public static void main(String[] args){
-//        testTryCatch();
-        testIterator();
+        Proto proto = new Proto();
+
+        proto.testTryCatch();
+        proto.testIterator();
     }
 
-    public static void testTryCatch(){
+    private  void testTryCatch(){
         String welcome = "Welcome!";
         char[] chars = welcome.toCharArray();
 
@@ -32,7 +36,7 @@ public class Test {
 
     }
 
-    public static void testIterator() {
+    protected void testIterator() {
         List<String> list = new ArrayList<>();
         list.add("California");
         list.add("Oregon");
