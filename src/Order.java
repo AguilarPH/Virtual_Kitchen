@@ -1,12 +1,10 @@
 import model.Menu;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Order {
 
-    public double showMenu(List<Menu> menu) {
+    public double showMenuCheck(List<Menu> menu) {
         double totalPrice = 0;
         for (Menu i : menu){
             System.out.println(i.getName());
