@@ -16,24 +16,12 @@ public class Menu {
         this.plateType = plateType;
     }
 
-    public void setName(MenuItems name) {
-        this.name = name.getName();
-    }
-
     public String getName() {
         return name;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
     public double getPrice() {
         return price;
-    }
-
-    public void setPlateType(String plate) {
-        this.plateType = plate;
     }
 
     public String getPlateType() {
