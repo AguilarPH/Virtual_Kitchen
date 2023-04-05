@@ -1,15 +1,15 @@
-import model.Menu;
+package model;
 
 import java.util.List;
 
-public class Order {
+public class Cart {
 
     public double showMenuCheck(List<Menu> menu) {
         double totalPrice = 0;
-        for (Menu i : menu){
-            System.out.println(i.getName());
-            totalPrice += i.getPrice();
-        }
+//        for (Menu i : menu){
+//            System.out.println(i.getName());
+//            totalPrice += i.getPrice();
+//        }
 
         return totalPrice;
     }
