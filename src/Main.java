@@ -1,12 +1,7 @@
 import model.Customer;
-import model.Meal;
 import model.Menu;
 import model.Cart;
-
 import java.text.NumberFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 
 public class Main {

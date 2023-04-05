@@ -4,15 +4,6 @@ import java.util.List;
 
 public class Cart {
 
-    public double showMenuCheck(List<Menu> menu) {
-        double totalPrice = 0;
-//        for (Menu i : menu){
-//            System.out.println(i.getName());
-//            totalPrice += i.getPrice();
-//        }
-
-        return totalPrice;
-    }
     public static double check(String ... items) {
         double orderSum = 0;
 
