@@ -1,18 +1,91 @@
 package model;
 
-import java.util.List;
+import java.util.*;
 
 public class Cart {
 
-    public double showMenuCheck(List<Menu> menu) {
-        double totalPrice = 0;
-//        for (Menu i : menu){
-//            System.out.println(i.getName());
-//            totalPrice += i.getPrice();
-//        }
+    private static Map<Meal, Integer> order = new HashMap<>();
 
-        return totalPrice;
+    public static void addMeal(int quantity, Meal meal) {
+        order.put(meal, quantity);
     }
+
+    public static void removeMeal(Meal meal) {
+        if (order.size() == 0) {
+            System.out.println("no items has been added to the order");
+        } else {
+
+            Set<Meal> mealSet = order.keySet();
+            int toRemove = 0;
+
+            if (order.get(meal) > 1) {
+                Scanner sc = new Scanner(System.in);
+                System.out.println("How many of theses meals do you want to remove?");
+                toRemove = Integer.parseInt(sc.nextLine());
+            }
+            if ((order.get(meal) - toRemove) > 1) {
+                order.replace(meal, (order.get(meal) - toRemove));
+            } else {
+                order.remove(meal);
+            }
+
+            System.out.println("item removed from order");
+
+        }
+
+    }
+
+    public static void cancelOrder() {
+        order.clear();
+         System.out.println("Order has been cancelled, all items were removed");
+    }
+
+    public static void viewOrder() {
+        StringBuilder recipe = new StringBuilder();
+        int maxItemLength = 0;
+
+        Set<Meal> mealSet = order.keySet();
+
+
+//        get the length of longest item
+        for (Meal meal : mealSet) {
+            if (meal.getName().length() > maxItemLength) {
+                maxItemLength = meal.getName().length();
+            }
+        }
+
+//        Print recipe header
+        for (int i = 0; i <= (maxItemLength - 2); i++) {
+            recipe.append("*");
+        }
+
+        recipe.append(" Order ");
+
+        for (int i = 0; i <= (maxItemLength - 2); i++) {
+            recipe.append("*");
+        }
+
+        recipe.append("\n")
+                .append("\n");
+
+//        Print order items and prices
+        for (Meal item : mealSet) {
+            int blankSpace = 7 + maxItemLength - item.getName().length();
+            recipe.append(item.getName());
+
+            for (int i = 0; i <= blankSpace; i++) {
+                recipe.append(" ");
+            }
+
+            recipe.append(item.getPrice() * order.get(item))
+                    .append("\n")
+                    .append("\n");
+        }
+
+        System.out.println(recipe);
+
+    }
+
     public static double check(String ... items) {
         double orderSum = 0;
 
