@@ -1,30 +1,61 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Menu {
 
-    public static final String MAIN_DISH = "Main";
-    public static final String SIDE_DISH = "Side Dish";
-    public static final String SOFT_DRINK = "Soft Drink";
+    private static List<Meal> meals = new ArrayList<>();
 
-    private String name;
-    private double price;
-    private String plateType;
 
-    public Menu(MenuItems item, String plateType) {
-        this.name = item.getName();
-        this.price = item.getPrice();
-        this.plateType = plateType;
-    }
+    public static void showMenu(){
+        meals.add(Meal.FRIED_CHICKEN);
+        meals.add(Meal.CHEESE_BURGER);
+        meals.add(Meal.BABY_RIBS);
+        meals.add(Meal.FRENCH_FRIES);
+        meals.add(Meal.MILKSHAKE);
+        meals.add(Meal.VANILLA_FLOAT);
 
-    public String getName() {
-        return name;
-    }
+        StringBuilder menu = new StringBuilder();
+        int maxItemLength = 0;
 
-    public double getPrice() {
-        return price;
-    }
 
-    public String getPlateType() {
-        return plateType;
+//        get the length of longest item
+        for (int i = 0; i < meals.size() - 2; i++) {
+            if (meals.get(i).getName().length() > maxItemLength) {
+                maxItemLength = meals.get(i).getName().length();
+            }
+        }
+
+//        Print menu header
+        for (int i = 0; i <= (maxItemLength - 2); i++) {
+            menu.append("*");
+        }
+
+        menu.append(" Menu ");
+
+        for (int i = 0; i <= (maxItemLength - 2); i++) {
+            menu.append("*");
+        }
+
+        menu.append("\n")
+                .append("\n");
+
+//        Print menu items and prices
+        for (Meal item : meals) {
+            int blankSpace = 7 + maxItemLength - item.getName().length();
+            menu.append(item.getName());
+
+            for (int i = 0; i <= blankSpace; i++) {
+                menu.append(" ");
+            }
+
+            menu.append(item.getPrice())
+                    .append("\n")
+                    .append("\n");
+        }
+
+        System.out.println(menu);
+
     }
 }
