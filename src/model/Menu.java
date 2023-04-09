@@ -1,20 +1,22 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Menu {
 
-    private static List<Meal> meals = new ArrayList<>();
+    private static final List<Meal> meals = new ArrayList<>();
+
+    public static List<Meal> getMeals() {
+        return meals;
+    }
 
 
     public static void showMenu(){
-        meals.add(Meal.FRIED_CHICKEN);
-        meals.add(Meal.CHEESE_BURGER);
-        meals.add(Meal.BABY_RIBS);
-        meals.add(Meal.FRENCH_FRIES);
-        meals.add(Meal.MILKSHAKE);
-        meals.add(Meal.VANILLA_FLOAT);
+        for (Meal meal : Meal.values()) {
+            if (meal.isAvailable()) {
+                meals.add(meal);
+            }
+        }
 
         StringBuilder menu = new StringBuilder();
         int maxItemLength = 0;
@@ -54,8 +56,12 @@ public class Menu {
                     .append("\n")
                     .append("\n");
         }
-
         System.out.println(menu);
 
     }
+
+    public static void updateMenu() {
+        meals.get(0).isAvailable();
+    }
+
 }

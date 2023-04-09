@@ -1,15 +1,18 @@
 import model.Customer;
+import model.Meal;
 import model.Menu;
 import model.Cart;
 import java.text.NumberFormat;
+import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 
 public class Main {
     public static void main(String[] args) {
+        Customer customer = greeting();
 
         Menu.showMenu();
 
-//        System.out.println(takingOrder(client));
 //        System.out.printf("Your order will be delivered to %s", client.getAddress());
 
     }
@@ -30,26 +33,34 @@ public class Main {
 
         System.out.println("Finally, please provide a contact phone number: ");
         client.setPhoneNumber(sc.nextLine());
+        System.out.print("\n");
 
         return client;
     }
 
-    private static void takingOrder(Customer client) { //Next thing to fix
-        Cart order = new Cart();
-//        order.showMenu(carte);
+    private static void takingOrder(Customer client) { // To Finish
 
         Scanner sc = new Scanner(System.in);
         NumberFormat curF = NumberFormat.getCurrencyInstance();
-        String mealRequest;
-        StringBuilder output = new StringBuilder("We are preparing your ");
+        StringBuilder output = new StringBuilder();
 
-        System.out.printf("What meal would you like to have?: %n");
-        mealRequest = sc.nextLine();
+        System.out.println("What meal would you like to order?");
+        String mealRequest = sc.nextLine();
 
-        if (!mealRequest.equals("")) {
-            output.append(mealRequest)
-                    .append(", your total will be ")
-                    .append(curF.format(Cart.check(mealRequest)));
+
+        System.out.println("How many times do you wish to add this meal to your order?");
+        int repeats = Integer.parseInt(sc.nextLine());
+
+        for (Meal meal : Menu.getMeals()) {
+            if (meal.getName().equals(mealRequest)) {
+                Cart.addMeal(repeats, meal);
+
+                output.append("Added ")
+                        .append(repeats)
+                        .append(" ")
+                        .append(meal.getName())
+                        .append(" to you order.");
+            }
         }
 
     }

@@ -1,7 +1,6 @@
 package model;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public enum Meal {
      FRIED_CHICKEN("Fried Chicken", 135.75, friedChicken_ingredients()),
@@ -11,10 +10,10 @@ public enum Meal {
     MILKSHAKE("Milkshake",40.15, milkshake_Ingredients()),
     VANILLA_FLOAT("Vanilla Float", 50.33, vanillaFloat_Ingredients());
 
-    private String name;
-    private double price;
+    private final String name;
+    private final double price;
 
-    private Map<Ingredient, Double> ingredients = new HashMap<>();
+    private final Map<Ingredient, Double> ingredients = new HashMap<>();
 
     Meal(String name, double price, Map<Ingredient, Double> ingredients) {
         this.name = name;
@@ -32,6 +31,24 @@ public enum Meal {
 
     public Map<Ingredient, Double> getIngredients() {
         return ingredients;
+    }
+
+    public boolean isAvailable() {
+        boolean available = true;
+        Set<Ingredient> requiredIngredients = ingredients.keySet();
+        Iterator<Ingredient> iterator = requiredIngredients.iterator();
+
+        Ingredient key;
+        while (iterator.hasNext()) {
+            key = iterator.next();
+            if ((key.getStock() - ingredients.get(key)) <= 0) {
+                available = false;
+                System.out.println("Not enough " + key.getName() + " in inventory");
+            }
+        }
+
+        return available;
+
     }
 
     private static Map<Ingredient, Double> friedChicken_ingredients() {
@@ -82,7 +99,7 @@ public enum Meal {
         Map<Ingredient, Double> ingredients = new HashMap<>();
 
         ingredients.put(Ingredient.MILK_LTR, 0.4);
-        ingredients.put(Ingredient.VANILLA_ICECREAM_LTR, 0.2);
+        ingredients.put(Ingredient.VANILLA_ICE_CREAM_LTR, 0.2);
         ingredients.put(Ingredient.WHIPPED_CREAM_LTR, 0.125);
 
         return ingredients;
@@ -91,7 +108,7 @@ public enum Meal {
         Map<Ingredient, Double> ingredients = new HashMap<>();
 
         ingredients.put(Ingredient.ROOT_BEER_LTR, 0.4);
-        ingredients.put(Ingredient.VANILLA_ICECREAM_LTR, 0.2);
+        ingredients.put(Ingredient.VANILLA_ICE_CREAM_LTR, 0.2);
 
         return ingredients;
     }
