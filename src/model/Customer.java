@@ -20,7 +20,7 @@ public class Customer {
     public static void getAdminOpts(String username) {
         Scanner sc = new Scanner(System.in);
 
-        System.out.printf("Please insert password");
+        System.out.println("Please insert password");
         String password = sc.nextLine();
 
 
