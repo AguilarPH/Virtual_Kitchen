@@ -5,7 +5,6 @@ import java.util.Scanner;
 public class Customer {
     private String name;
     private String address;
-
     private String phoneNumber;
 
     public void setName(String name) {this.name = name;}

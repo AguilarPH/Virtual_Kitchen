@@ -4,15 +4,15 @@ import java.util.*;
 
 public class Menu {
 
-    private static final List<Meal> meals = new ArrayList<>();
+    private List<Meal> meals = new ArrayList<>();
 
-    public static List<Meal> getMeals() {
+    public List<Meal> getMeals() {
         return meals;
     }
 
 
-    public static void showMenu(){
-        for (Meal meal : Meal.values()) {
+    public void showMenu(){
+        for (Meal meal : meals) {
             if (meal.isAvailable()) {
                 meals.add(meal);
             }
@@ -23,7 +23,7 @@ public class Menu {
 
 
 //        get the length of longest item
-        for (int i = 0; i < meals.size() - 2; i++) {
+        for (int i = 0; i < meals.size() - 1; i++) {
             if (meals.get(i).getName().length() > maxItemLength) {
                 maxItemLength = meals.get(i).getName().length();
             }
@@ -58,10 +58,6 @@ public class Menu {
         }
         System.out.println(menu);
 
-    }
-
-    public static void updateMenu() {
-        meals.get(0).isAvailable();
     }
 
 }

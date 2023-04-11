@@ -4,18 +4,19 @@ import java.util.*;
 
 public class Cart {
 
-    private static Map<Meal, Integer> order = new HashMap<>();
+    private List<CartItem> order = new ArrayList<>();
 
-    public static void addMeal(int quantity, Meal meal) {
+    public void addMeal(int quantity, int meal) {
+        CartItem cartItem = new CartItem(quantity, meal)
         order.put(meal, quantity);
     }
 
-    public static void removeMeal(Meal meal) {
+    public void removeMeal(Meal meal) {
         if (order.size() == 0) {
             System.out.println("no items has been added to the order");
         } else {
 
-            Set<Meal> mealSet = order.keySet();
+            Set<Integer> mealSet = order.keySet();
             int toRemove = 0;
 
             if (order.get(meal) > 1) {
@@ -35,12 +36,12 @@ public class Cart {
 
     }
 
-    public static void cancelOrder() {
+    public void cancelOrder() {
         order.clear();
          System.out.println("Order has been cancelled, all items were removed");
     }
 
-    public static void viewOrder() {
+    public void viewOrder() {
         StringBuilder recipe = new StringBuilder();
         int maxItemLength = 0;
 
@@ -85,35 +86,34 @@ public class Cart {
         System.out.println(recipe);
 
     }
-
-    public static double check(String ... items) {
-        double orderSum = 0;
-
-        for (String item : items) {
-
-
-            switch (item.toLowerCase()) {
-                case "fried chicken":
-                    System.out.printf("%s added to the order\n", item);
-                    orderSum += 92.3;
-                    break;
-
-                case "french fries":
-                    orderSum += 26.0;
-                    System.out.printf("%s added to the order\n", item);
-                    break;
-
-                case "milkshake":
-                    orderSum += 40.0;
-                    System.out.printf("%s added to the order\n", item);
-                    break;
-
-                default:
-                    System.out.printf("%s is not in the menu \n", item);
-
-            }
-        }
-        return orderSum;
-
-    }
+//    public double check(String ... items) {
+//        double orderSum = 0;
+//
+//        for (String item : items) {
+//
+//
+//            switch (item.toLowerCase()) {
+//                case "fried chicken":
+//                    System.out.printf("%s added to the order\n", item);
+//                    orderSum += 92.3;
+//                    break;
+//
+//                case "french fries":
+//                    orderSum += 26.0;
+//                    System.out.printf("%s added to the order\n", item);
+//                    break;
+//
+//                case "milkshake":
+//                    orderSum += 40.0;
+//                    System.out.printf("%s added to the order\n", item);
+//                    break;
+//
+//                default:
+//                    System.out.printf("%s is not in the menu \n", item);
+//
+//            }
+//        }
+//        return orderSum;
+//
+//    }
 }

@@ -11,7 +11,8 @@ public class Main {
     public static void main(String[] args) {
         Customer customer = greeting();
 
-        Menu.showMenu();
+        Menu menu = new Menu();
+        menu.showMenu();
 
 //        System.out.printf("Your order will be delivered to %s", client.getAddress());
 
