@@ -1,18 +1,14 @@
 import model.Customer;
-import model.Meal;
 import model.Menu;
-import model.Cart;
-import java.text.NumberFormat;
-import java.util.List;
 import java.util.Scanner;
-import java.util.Set;
 
 public class Main {
     public static void main(String[] args) {
-        Customer customer = greeting();
+//        Customer customer = greeting();
 
         Menu menu = new Menu();
         menu.showMenu();
+//        customer.makeOrder(menu);
 
 //        System.out.printf("Your order will be delivered to %s", client.getAddress());
 
@@ -37,33 +33,6 @@ public class Main {
         System.out.print("\n");
 
         return client;
-    }
-
-    private static void takingOrder(Customer client) { // To Finish
-
-        Scanner sc = new Scanner(System.in);
-        NumberFormat curF = NumberFormat.getCurrencyInstance();
-        StringBuilder output = new StringBuilder();
-
-        System.out.println("What meal would you like to order?");
-        String mealRequest = sc.nextLine();
-
-
-        System.out.println("How many times do you wish to add this meal to your order?");
-        int repeats = Integer.parseInt(sc.nextLine());
-
-        for (Meal meal : Menu.getMeals()) {
-            if (meal.getName().equals(mealRequest)) {
-                Cart.addMeal(repeats, meal);
-
-                output.append("Added ")
-                        .append(repeats)
-                        .append(" ")
-                        .append(meal.getName())
-                        .append(" to you order.");
-            }
-        }
-
     }
 
 }

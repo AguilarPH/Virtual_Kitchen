@@ -10,7 +10,6 @@ public class Menu {
         return meals;
     }
 
-
     public void showMenu(){
         for (Meal meal : meals) {
             if (meal.isAvailable()) {
@@ -18,7 +17,7 @@ public class Menu {
             }
         }
 
-        StringBuilder menu = new StringBuilder();
+        StringBuilder menuDisplay = new StringBuilder();
         int maxItemLength = 0;
 
 
@@ -31,32 +30,32 @@ public class Menu {
 
 //        Print menu header
         for (int i = 0; i <= (maxItemLength - 2); i++) {
-            menu.append("*");
+            menuDisplay.append("*");
         }
 
-        menu.append(" Menu ");
+        menuDisplay.append(" Menu ");
 
         for (int i = 0; i <= (maxItemLength - 2); i++) {
-            menu.append("*");
+            menuDisplay.append("*");
         }
 
-        menu.append("\n")
+        menuDisplay.append("\n")
                 .append("\n");
 
 //        Print menu items and prices
         for (Meal item : meals) {
             int blankSpace = 7 + maxItemLength - item.getName().length();
-            menu.append(item.getName());
+            menuDisplay.append(item.getName());
 
             for (int i = 0; i <= blankSpace; i++) {
-                menu.append(" ");
+                menuDisplay.append(" ");
             }
 
-            menu.append(item.getPrice())
+            menuDisplay.append(item.getPrice())
                     .append("\n")
                     .append("\n");
         }
-        System.out.println(menu);
+        System.out.println(menuDisplay);
 
     }
 
